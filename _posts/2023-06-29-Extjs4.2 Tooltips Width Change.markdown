@@ -1,0 +1,28 @@
+---
+layout: post
+title: "Extjs4.2 Tooltips Width Change"
+date: 2023-06-29 14:46:00
+category: extjs4.2
+tags: [extjs4.2]
+---
+
+[ExtJS 4.2: ToolTips not wide enough to see contents](https://stackoverflow.com/questions/15834689/extjs-4-2-tooltips-not-wide-enough-to-see-contents)
+
+```css
+.x-tip {
+    width: auto !important;
+}
+.x-tip-body {
+    width: auto !important;
+}
+.x-tip-body span {
+    width: auto !important;
+}
+```
+
+
+[jekyll]: http://jekyllrb.com
+[jekyll-gh]: https://github.com/jekyll/jekyll
+[jekyll-help]: https://github.com/jekyll/jekyll-help
+
+

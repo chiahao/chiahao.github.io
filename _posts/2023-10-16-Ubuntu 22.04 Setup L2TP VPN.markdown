@@ -1,0 +1,24 @@
+---
+layout: post
+title: "Ubuntu 22.04 Setup L2TP VPN"
+date: 2023-10-16 10:32:00
+category: ubuntu
+tags: [ubuntu, vpn]
+---
+
+1. install `xl2tpd`  
+2. Can't get full editor, execute network manager from console to see error message:  
+```bash
+nm-connection-editor
+```
+3. error message: `Could not load editor VPN plugin for “org.freedesktop.NetworkManager.l2tp”`  
+4. install `network-manager-l2tp-gnome`  
+
+
+
+
+[jekyll]: http://jekyllrb.com
+[jekyll-gh]: https://github.com/jekyll/jekyll
+[jekyll-help]: https://github.com/jekyll/jekyll-help
+
+

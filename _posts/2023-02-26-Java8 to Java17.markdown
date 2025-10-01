@@ -1,0 +1,62 @@
+---
+layout: post
+title: "Java8 to Java17"
+date: 2023-02-26 14:13:00
+category: programming
+tags: [java]
+---
+
+
+[A categorized list of all Java and JVM features since JDK 8 to 21](https://advancedweb.hu/a-categorized-list-of-all-java-and-jvm-features-since-jdk-8-to-21/)
+
+##### Record Classes, terse syntax to define immutable DTOs.  
+`jdk16`  
+```java
+record Point(int x, int y) { }
+
+var point = new Point(1, 2);
+point.x(); // returns 1
+point.y(); // returns 2
+```
+
+##### Pattern Matching for instanceof to eliminate the need for explicit casts after a type check.  
+`jdk16`  
+```java
+if (obj instanceof String s && s.length() > 5) {
+  System.out.println(s);
+}
+```
+
+##### Text Blocks  
+`jdk15`  
+```java
+String html = """   
+               <html>
+                 <body>
+                 </body>
+               </html>
+              """;
+```
+
+### Switch Expressions  
+`jdk14`  
+```java
+int numLetters = switch(day) {
+  case MONDAY -> 6;
+  default -> {
+    String s = day.toString();
+    int result = s.length();
+    yield result;
+  }
+}
+```
+
+##### 
+
+
+
+[jekyll]: http://jekyllrb.com
+[jekyll-gh]: https://github.com/jekyll/jekyll
+[jekyll-help]: https://github.com/jekyll/jekyll-help
+
+

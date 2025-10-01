@@ -1,0 +1,18 @@
+---
+layout: post
+title: "SwiftUI 100-Day 061"
+date: 2022-01-15 15:58:00
+category: programming
+tags: [swiftui]
+---
+
+# Core Data
+
+
+
+
+[jekyll]: http://jekyllrb.com
+[jekyll-gh]: https://github.com/jekyll/jekyll
+[jekyll-help]: https://github.com/jekyll/jekyll-help
+
+

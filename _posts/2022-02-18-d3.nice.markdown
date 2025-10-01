@@ -1,0 +1,37 @@
+---
+layout: post
+title: "d3.nice()"
+date: 2022-02-18 08:23:00
+category: program
+tags: [d3js]
+---
+
+[nice.js](https://github.com/d3/d3-scale/blob/main/src/nice.js)
+```javascript
+domain[i0] = interval.floor(x0);
+domain[i1] = interval.ceil(x1);
+```
+
+畫 24 小時的軸, 沒有用 nice() 前, 會從當下時間開始, 所以會原點不一定有值
+```javascript
+d3.scaleTime()
+	.domain(new Date(), new Date() + 24 * 60 * 60 * 1000);
+```
+
+用了 nice() 後, 會從 6 AM 到 9 AM, 所以加 21 就好  
+（其實這邊沒有看懂為什麼）
+```javascript
+d3.scaleTime()
+	.domain(new Date(), new Date() + 24 * 60 * 60 * 1000)
+	.nice();
+```
+
+像是如果想表達 100 年, 也不是加 100, 而是加 90。
+
+
+
+
+[jekyll]: http://jekyllrb.com
+[jekyll-gh]: https://github.com/jekyll/jekyll
+[jekyll-help]: https://github.com/jekyll/jekyll-help
+

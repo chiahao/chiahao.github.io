@@ -1,0 +1,24 @@
+---
+layout: post
+title: "Response.entity to Prevent HTML Page in Jersey"
+date: 2024-04-15 11:32:00
+category: jersey3
+tags: [jersey3]
+---
+
+use `.entity()` to inhibit default returned HTML.
+
+```java
+return Response
+	.status(UNAUTHORIZED)
+	.entity("Custom Message")
+	.type(MediaType.APPLICATION_JSON)
+	.build();
+```
+
+
+[jekyll]: http://jekyllrb.com
+[jekyll-gh]: https://github.com/jekyll/jekyll
+[jekyll-help]: https://github.com/jekyll/jekyll-help
+
+

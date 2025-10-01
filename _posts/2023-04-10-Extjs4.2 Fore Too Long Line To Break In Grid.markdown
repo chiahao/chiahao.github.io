@@ -1,0 +1,109 @@
+---
+layout: post
+title: "Extjs4.2 Fore Too Long Line To Break In Grid"
+date: 2023-04-10 10:20:00
+category: javascript
+tags: [javascript, extjs4.2]
+---
+
+The final solution is to use `overflow-wrap`.  
+P.S. Can't apply to hidden column, will cause all row height become enormously large.  
+
+```javascript
+var myGrid = Ext.create('Ext.grid.Panel', {
+  columns: {
+    items: [
+      {text: '程式日誌', dataIndex: 'LOGGING', width: 750, tdCls: 'column_no_wrap'},
+```
+
+
+```css
+.column_no_wrap .x-grid-cell-inner {
+    white-space: normal;
+    overflow-wrap: break-word;
+}
+```
+
+
+
+#### Not work:  
+1. [Maintain white-spaces in Data when using extjs](https://stackoverflow.com/questions/44240023/maintain-white-spaces-in-data-when-using-extjs)
+
+```javascript
+Ext.util.CSS.createStyleSheet(
+    '.custom-whitespace .x-grid-cell-inner { white-space:pre }'
+);
+
+Ext.create('Ext.grid.Panel', {
+    renderTo: Ext.getBody(),
+
+    title: 'StackOverflow: Maintain white-spaces in Data when using extjs',
+
+    columns: [{
+        header: 'col',
+        flex: 1,
+        dataIndex: 'field1',
+        tdCls: 'custom-whitespace'
+    }],
+
+    store: [
+        ['one two three'],
+        ['four five    six'],
+        ['seven eight nine']
+    ]
+});
+```
+
+2. Hover Tooltip
+
+[Extjs 4 grid mouseover show full cell value](https://stackoverflow.com/questions/12207018/extjs-4-grid-mouseover-show-full-cell-value)  
+
+```javascript
+function renderTip(value, metaData, record, rowIdx, colIdx, store) {
+    metaData.tdAttr = 'data-qtip="' + value + '"';
+    return value;
+};
+```
+
+[Extjs4 set tooltip on each column hover in gridPanel](https://stackoverflow.com/questions/7539006/extjs4-set-tooltip-on-each-column-hover-in-gridpanel)  
+Not work neighter.   
+
+```javascript
+Ext.getCmp('DynamicDemandGrid').getView().on('render', function(view) {
+    view.tip = Ext.create('Ext.tip.ToolTip', {
+        // The overall target element.
+        target: view.el,
+        // Each grid row causes its own seperate show and hide.
+        delegate: view.cellSelector,
+        // Moving within the row should not hide the tip.
+        trackMouse: true,
+        // Render immediately so that tip.body can be referenced prior to the first show.
+        renderTo: Ext.getBody(),
+        listeners: {
+            // Change content dynamically depending on which element triggered the show.
+            beforeshow: function updateTipBody(tip) {
+                var gridColums = view.getGridColumns();
+                var column = gridColums[tip.triggerElement.cellIndex];
+                var val=view.getRecord(tip.triggerElement.parentNode).get(column.dataIndex);
+                tip.update(val);
+            }
+        }
+    });
+});
+```
+
+#### Kind of Working?
+1. Using css:  
+
+```javascript
+
+```
+
+
+
+
+[jekyll]: http://jekyllrb.com
+[jekyll-gh]: https://github.com/jekyll/jekyll
+[jekyll-help]: https://github.com/jekyll/jekyll-help
+
+

@@ -1,0 +1,17 @@
+---
+layout: post
+title: "Fetch"
+date: 2025-04-02 10:49:00
+category: program
+tags: [javascript]
+---
+
+```bash
+:%g!/matching words/d
+```
+
+
+[jekyll]: http://jekyllrb.com
+[jekyll-gh]: https://github.com/jekyll/jekyll
+[jekyll-help]: https://github.com/jekyll/jekyll-help
+

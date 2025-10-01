@@ -1,0 +1,17 @@
+---
+layout: post
+title: "java.sql.TimeStamp To LocalDateTIme"
+date: 2022-02-23 11:14:00
+category: programming
+tags: [LocalDateTime]
+---
+
+```java
+timeStamp.toLocalDateTime();
+```
+
+
+[jekyll]: http://jekyllrb.com
+[jekyll-gh]: https://github.com/jekyll/jekyll
+[jekyll-help]: https://github.com/jekyll/jekyll-help
+

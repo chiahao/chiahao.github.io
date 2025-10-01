@@ -1,0 +1,151 @@
+---
+layout: post
+title: "OSX 10.13.6 High Sierra Homebrew Gem Not Work"
+date: 2022-02-24 09:37:00
+category: osx
+tags: [osx]
+---
+
+起因是為了安裝 dart sass, 結果就把原本不確定是 gem 還是 brew 的 sass 移除,  
+結果導致 http-server 也壞掉了...
+
+brew install http-server 一直出錯:
+
+## llvm
+
+## sqlite
+1. curl 因為 https 而無法下載
+2. 
+```shell
+brew link --overwrite --dry-run python@2
+/usr/local/Frameworks/Python.framework/Headers -> /usr/local/Cellar/python@3.9/3.9.10/Frameworks/Python.framework/Headers
+/usr/local/Frameworks/Python.framework/Python -> /usr/local/Cellar/python@3.9/3.9.10/Frameworks/Python.framework/Python
+/usr/local/Frameworks/Python.framework/Resources -> /usr/local/Cellar/python@3.9/3.9.10/Frameworks/Python.framework/Resources
+/usr/local/Frameworks/Python.framework/Versions/Current -> /usr/local/Cellar/python@3.9/3.9.10/Frameworks/Python.framework/Versions/Current
+```
+
+3. 結果還是出錯了
+Last 15 lines from /Users/hao/Library/Logs/Homebrew/llvm@12/01.cmake:
+  Could NOT find Python3 (missing: Interpreter)
+
+      Reason given by package: 
+          Interpreter: Cannot run the interpreter "/usr/local/bin/python3"
+
+Call Stack (most recent call first):
+  /usr/local/Cellar/cmake/3.22.2/share/cmake/Modules/FindPackageHandleStandardArgs.cmake:594 (_FPHSA_FAILURE_MESSAGE)
+  /usr/local/Cellar/cmake/3.22.2/share/cmake/Modules/FindPython/Support.cmake:3166 (find_package_handle_standard_args)
+  /usr/local/Cellar/cmake/3.22.2/share/cmake/Modules/FindPython3.cmake:490 (include)
+  CMakeLists.txt:700 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/tmp/llvmA12-20220224-56416-1ckxc61/llvm-project-12.0.1.src/llvm/build/CMakeFiles/CMakeOutput.log".
+See also "/tmp/llvmA12-20220224-56416-1ckxc61/llvm-project-12.0.1.src/llvm/build/CMakeFiles/CMakeError.log".
+
+4. 重裝 `brew reinstall python@3.9` 再裝一次 llvm@12, 還好有用
+5. 再次裝 `brew install http-server`
+
+> "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool" -static -no_warning_for_no_symbols -o ../../../../../lib/liblldMachO.a CMakeFiles/lldMachO.dir/ArchHandler.cpp.o CMakeFiles/lldMachO.dir/ArchHandler_arm.cpp.o CMakeFiles/lldMachO.dir/ArchHandler_arm64.cpp.o CMakeFiles/lldMachO.dir/ArchHandler_x86.cpp.o CMakeFiles/lldMachO.dir/ArchHandler_x86_64.cpp.o CMakeFiles/lldMachO.dir/CompactUnwindPass.cpp.o CMakeFiles/lldMachO.dir/GOTPass.cpp.o CMakeFiles/lldMachO.dir/LayoutPass.cpp.o CMakeFiles/lldMachO.dir/MachOLinkingContext.cpp.o CMakeFiles/lldMachO.dir/MachONormalizedFileBinaryReader.cpp.o CMakeFiles/lldMachO.dir/MachONormalizedFileBinaryWriter.cpp.o CMakeFiles/lldMachO.dir/MachONormalizedFileFromAtoms.cpp.o CMakeFiles/lldMachO.dir/MachONormalizedFileToAtoms.cpp.o CMakeFiles/lldMachO.dir/MachONormalizedFileYAML.cpp.o CMakeFiles/lldMachO.dir/ObjCPass.cpp.o CMakeFiles/lldMachO.dir/ShimPass.cpp.o CMakeFiles/lldMachO.dir/StubsPass.cpp.o CMakeFiles/lldMachO.dir/TLVPass.cpp.o CMakeFiles/lldMachO.dir/WriterMachO.cpp.o
+> [ 80%] Built target lldMachO
+> make: *** [all] Error 2
+> 
+> Do not report this issue to Homebrew/brew or Homebrew/core!
+> 
+> These open issues may also help:
+> error: Unsupport load command from llvm tools on m1 mac https://github.com/Homebrew/homebrew-core/issues/95319
+> 
+> Error: You are using macOS 10.13.
+> We (and Apple) do not provide support for this old version.
+> You will encounter build failures with some formulae.
+> Please create pull requests instead of asking for help on Homebrew's GitHub,
+> Twitter or any other official channels. You are responsible for resolving
+> any issues you experience while you are running this
+> old version.
+
+果然又出現問題, 而且還是在 llvm...
+
+6. 重新試著 brew upgrade
+不過應該沒有用...
+
+果然在一樣的地方出錯: 
+"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool" -static -no_warning_for_no_symbols -o ../../../../../lib/liblldMachO.a CMakeFiles/lldMachO.dir/ArchHandler.cpp.o CMakeFiles/lldMachO.dir/ArchHandler_arm.cpp.o CMakeFiles/lldMachO.dir/ArchHandler_arm64.cpp.o CMakeFiles/lldMachO.dir/ArchHandler_x86.cpp.o CMakeFiles/lldMachO.dir/ArchHandler_x86_64.cpp.o CMakeFiles/lldMachO.dir/CompactUnwindPass.cpp.o CMakeFiles/lldMachO.dir/GOTPass.cpp.o CMakeFiles/lldMachO.dir/LayoutPass.cpp.o CMakeFiles/lldMachO.dir/MachOLinkingContext.cpp.o CMakeFiles/lldMachO.dir/MachONormalizedFileBinaryReader.cpp.o CMakeFiles/lldMachO.dir/MachONormalizedFileBinaryWriter.cpp.o CMakeFiles/lldMachO.dir/MachONormalizedFileFromAtoms.cpp.o CMakeFiles/lldMachO.dir/MachONormalizedFileToAtoms.cpp.o CMakeFiles/lldMachO.dir/MachONormalizedFileYAML.cpp.o CMakeFiles/lldMachO.dir/ObjCPass.cpp.o CMakeFiles/lldMachO.dir/ShimPass.cpp.o CMakeFiles/lldMachO.dir/StubsPass.cpp.o CMakeFiles/lldMachO.dir/TLVPass.cpp.o CMakeFiles/lldMachO.dir/WriterMachO.cpp.o
+> [ 80%] Built target lldMachO
+> make: *** [all] Error 2
+ 
+
+起因是我把 gem upgrade 了?  
+可是也不知道要降回什麼版本?
+
+7. 試著回頭看自己的 gem, 執行 node 會產生
+> dyld: Library not loaded: /usr/local/opt/icu4c/lib/libicui18n.67.dylib
+>   Referenced from: /usr/local/bin/node
+>   Reason: image not found
+> Abort trap: 6
+
+然後去查 libicui18n.67.dylib, 還真的有人有同樣 libicui18n.67.dylib 不見的問題,  
+然後說重裝 icu4c 就好, 所以試看看 `brew reinstall icu4c`
+
+結果雖然成功安裝了, 不過不對, 執行 node 時出錯的, 是 gem 安裝的 node, 不是 homebrew 的!
+
+8. 不對! 發現執行錯誤的, 的確就是 brew 裝的 node!
+```shell
+brew list node
+which node
+```
+的確指向同一個!
+
+然後 http-server 也的確是 brew 裝的!
+
+也就是說現在就是因為升級了 brew, 然後全部壞了...
+
+但是為什麼重裝了 icu4c 也沒有用? node 仍然無法執行?  
+移除 node 重裝看看!
+
+慘... 又在安裝相依的 llvm...
+
+9. 試看看有沒有舊的 node 版本可以安裝
+
+但是為什麼手動安裝 llvm 就沒問題?  
+會是因為指定安裝版本嗎?
+
+那再試看看手動安裝時, 不要指定版本呢?
+
+```shell
+brew info http-server
+```
+需要 node 但是沒有指定哪一版,  
+還是想看看能不能裝最新版的 node,  
+所以先裝回 llvm@12, 雖然他是 keg-only, 但是試看看能不能它裝 node
+
+[How do I use those tools outside of Homebrew?](https://docs.brew.sh/How-to-Build-Software-Outside-Homebrew-with-Homebrew-keg-only-Dependencies)
+
+
+10. 最後才想到可能可以裝舊版的 http-server,  
+去查 http-server old version, 才發現 npm 也可以裝,  
+然後就成功了?!
+
+11. 但是 sass 卻裝不起來
+`/usr/local/bin/sass` 真的找不到是哪裡裝的?  
+
+``` shell
+brew uninstall sass
+gem uninstall sass
+npm uninstall sass
+sudo npm uninstall sass  -n /usr/local/bin
+```
+都執行過了, 但是每個都說沒有安裝?
+
+所以就重新用 brew 安裝 sass,  
+並且強製蓋過去
+
+```shell
+brew link --overwrite sass
+```
+
+
+[jekyll]: http://jekyllrb.com
+[jekyll]: http://jekyllrb.com
+[jekyll]: http://jekyllrb.com
+[jekyll-gh]: https://github.com/jekyll/jekyll
+[jekyll-help]: https://github.com/jekyll/jekyll-help
+

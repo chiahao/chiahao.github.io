@@ -1,0 +1,26 @@
+---
+layout: post
+title: "Extjs4.2 Text Element With Custom HTML Height."
+date: 2023-06-29 14:46:00
+category: extjs4.2
+tags: [extjs4.2]
+---
+
+The `height` of outside container won't work,  
+the only solution is to specify the height of the labe which is in the same row.  
+
+```css
+{xtype: 'container', layout: 'vbox', margin: '5 0 5 0', height: 120,
+	iteVms: [
+		{xtype: 'label', id: 'next_month_label', margin: '0 5 0 20', height: '23px'},
+		{xtype: 'text', html: '<div id="nextMonthUnscheduled" class="nextMonthChart"></div>', baseCls: '', margin: '0 5 0 20'}
+	]
+}
+```
+
+
+[jekyll]: http://jekyllrb.com
+[jekyll-gh]: https://github.com/jekyll/jekyll
+[jekyll-help]: https://github.com/jekyll/jekyll-help
+
+

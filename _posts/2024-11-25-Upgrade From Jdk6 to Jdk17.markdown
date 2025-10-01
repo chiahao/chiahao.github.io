@@ -111,7 +111,7 @@ transNo = new String(transNo.getBytes("ISO-8859-1"), "UTF-8");
 *Joda* 官網也是寫要改用 *Java8* 內建的時間API。  
 
 > Note that from Java SE 8 onwards, users are asked to migrate to java.time (JSR-310) - a core part of the JDK which replaces this project.
--- [www.joda.org](www.joda.org)
+-- [www.joda.org](https://www.joda.org)
 
 但是 *Java8* 之後還是沒有 *JodaTime* 的 `Interval`, 
 可以考慮使用 `threeten-extra` 的 `Interval`.   

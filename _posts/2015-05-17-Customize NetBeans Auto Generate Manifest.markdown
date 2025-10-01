@@ -6,7 +6,7 @@ category: programming
 tags: [netbeans]
 ---
 
-#### [Netbeans manifest](http://stackoverflow.com/questions/1237084/netbeans-manifest)
+#### [Netbeans manifest](https://stackoverflow.com/questions/1237084/netbeans-manifest)
 增加 jar 檔的 manifest 檔內容  
 修改 project.properties 
 ```xml

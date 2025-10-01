@@ -7,11 +7,11 @@ tags: [netbeans, maven]
 ---
 
 
-[https://stackoverflow.com/questions/60031044/how-to-change-mavens-remote-repository-url-in-the-netbeans-ide-from-http-to-ht](How to change maven's Remote Repository URL in the NetBeans IDE (from http to https)?)
+## [How to change maven's Remote Repository URL in the NetBeans IDE (from http to https)?](https://stackoverflow.com/questions/60031044/how-to-change-mavens-remote-repository-url-in-the-netbeans-ide-from-http-to-ht)
 
-> Goto Netbeans installation folder > java > maven > conf, and here I updated the settings.xml file using administrative privilege.
-> as http repo link will not work now, just I created an mirror for central repo that is pre-built with IDE which cannot be changed.
-> Add this inside mirrors tag of `settings.xml`
+> Goto Netbeans installation folder > java > maven > conf, and here I updated the settings.xml file using administrative privilege.  
+> as http repo link will not work now, just I created an mirror for central repo that is pre-built with IDE which cannot be changed.  
+> Add this inside mirrors tag of `settings.xml`  
 
 ```xml
 <mirror>

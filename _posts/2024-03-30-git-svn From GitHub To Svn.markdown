@@ -9,7 +9,7 @@ tags: [git-svn]
 #### [Updating a git mirror of an SVN repository](https://stackoverflow.com/questions/10886784/updating-a-git-mirror-of-an-svn-repository)
 
 
-[Reviving a git-svn clone](http://rip747.wordpress.com/2009/06/17/reviving-a-git-svn-clone/)
+[Reviving a git-svn clone](https://rip747.wordpress.com/2009/06/17/reviving-a-git-svn-clone/)
 
 ### 1. Clone from GitHub  
 ```bash
